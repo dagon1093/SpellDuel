@@ -6,6 +6,8 @@ public class Hero
     private int Mana { get; set; } = 30;
     private int SwordDamage { get; set; } = 18;
     
+    private int SwordAttackManaResore { get; set; } = 10;
+    
     private int FireballDamage { get; set; } = 35;
     private int FireballManaCost { get; set; } = 20;
 
@@ -32,12 +34,6 @@ public class Hero
     
     public void SetMana(int mana) => Mana = mana;
     public int GetMana() => Mana;
-
-    public int SwordAttackManaCharge()
-    {
-        Random rnd = new Random();
-        return rnd.Next(10, 31);
-    }
     
     public Boolean CheckAvailableMana(int cost)
     {
@@ -46,5 +42,14 @@ public class Hero
     
     public int GetSpellFireballManaCost() => FireballManaCost;
 
+    public void RestoreMana(int manaPoints)
+    {
+        if (manaPoints + Mana >= 30)
+        {
+            Mana = 30;
+        }
+    }
+    
+    public int GetSwordAttackManaRestore() => SwordAttackManaResore;
 
 }

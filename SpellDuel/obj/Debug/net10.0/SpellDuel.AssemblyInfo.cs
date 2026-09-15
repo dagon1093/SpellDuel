@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpellDuel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b513a2c5db59fd6ad0a4e9343a066adaa2a97a5f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpellDuel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpellDuel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

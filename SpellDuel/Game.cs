@@ -25,6 +25,7 @@ public class Game
         {
             Console.WriteLine($"Golem health: {Golem.GetHealth()}, Your mana: {Hero.GetMana()}");
             Action(Console.ReadLine());
+            checkGameStatus();
 
             if (!isActive)
             {
@@ -32,6 +33,8 @@ public class Game
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
+            
+            
 
             
         }
@@ -42,7 +45,7 @@ public class Game
         switch (action)
         {
             case "1": 
-                Hero.SetMana(Hero.GetMana() + Hero.SwordAttackManaCharge()); 
+                Hero.RestoreMana(Hero.GetSwordAttackManaRestore()); 
                 Golem.SetHealth(Golem.GetHealth() - Hero.SwordAttack());
                 if (Golem.GetHealth() <= 0) EndGame();
                 break;
@@ -67,5 +70,10 @@ public class Game
     public void EndGame()
     {
         isActive = false;
+    }
+
+    public void checkGameStatus()
+    {
+        if (Golem.GetHealth() <= 0) EndGame();
     }
 }

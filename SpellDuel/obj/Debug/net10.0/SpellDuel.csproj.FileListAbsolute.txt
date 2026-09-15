@@ -12,3 +12,4 @@
 /Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.pdb
 /Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.genruntimeconfig.cache
 /Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/ref/SpellDuel.dll
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.sourcelink.json
