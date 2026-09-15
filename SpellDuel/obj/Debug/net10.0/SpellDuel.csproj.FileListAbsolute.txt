@@ -1,0 +1,14 @@
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/bin/Debug/net10.0/SpellDuel
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/bin/Debug/net10.0/SpellDuel.deps.json
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/bin/Debug/net10.0/SpellDuel.runtimeconfig.json
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/bin/Debug/net10.0/SpellDuel.dll
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/bin/Debug/net10.0/SpellDuel.pdb
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.GeneratedMSBuildEditorConfig.editorconfig
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.AssemblyInfoInputs.cache
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.AssemblyInfo.cs
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.csproj.CoreCompileInputs.cache
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.dll
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/refint/SpellDuel.dll
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.pdb
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/SpellDuel.genruntimeconfig.cache
+/Users/aleksandr/RiderProjects/SpellDuel/SpellDuel/obj/Debug/net10.0/ref/SpellDuel.dll
