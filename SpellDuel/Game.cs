@@ -28,8 +28,8 @@ public class Game
             if (!Action(Console.ReadLine()))
                 continue;
             
-            
-            GolemTurn();
+            checkGameStatus();
+            if (isActive) GolemTurn();
             checkGameStatus();
             
         }
