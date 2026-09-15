@@ -1,0 +1,35 @@
+# .NET build output
+**/bin/
+**/obj/
+artifacts/
+publish/
+
+# Rider / JetBrains
+.idea/
+*.iml
+*.sln.DotSettings.user
+
+# Visual Studio and local editor settings
+.vs/
+*.suo
+*.user
+*.csproj.user
+*.sln.docstates
+
+# Tests and coverage
+TestResults/
+coverage/
+*.trx
+*.coverage
+*.coveragexml
+
+# Local files and secrets
+*.log
+.env
+.env.*
+!.env.example
+appsettings.*.local.json
+
+# OS files
+.DS_Store
+Thumbs.db
