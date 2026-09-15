@@ -29,7 +29,7 @@ public class Game
 
             if (!isActive)
             {
-                Console.WriteLine("You defeat a golem");
+                Console.WriteLine("You defeated a golem");
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
@@ -46,14 +46,14 @@ public class Game
         {
             case "1": 
                 Hero.RestoreMana(Hero.GetSwordAttackManaRestore()); 
-                Golem.SetHealth(Golem.GetHealth() - Hero.SwordAttack());
+                Golem.GetDamage(Hero.SwordAttack());
                 if (Golem.GetHealth() <= 0) EndGame();
                 break;
             case "2":
                 if (Hero.CheckAvailableMana(Hero.GetSpellFireballManaCost()))
                 {
                     Hero.SetMana(Hero.GetMana() - Hero.GetSpellFireballManaCost());
-                    Golem.SetHealth(Golem.GetHealth() - Hero.FireballAttack());
+                    Golem.GetDamage(Hero.FireballAttack());
                     if (Golem.GetHealth() <= 0) EndGame();
                 }
                 else

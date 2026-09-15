@@ -12,5 +12,10 @@ public class Golem
     public void SetHealth(int health) => Health = health;
 
     public int GetHealth() => Health;
-    
+
+    public void GetDamage(int points)
+    {
+        if (Health - points <= 0) Health = 0;
+        else  Health -= points;
+    }
 }

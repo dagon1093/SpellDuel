@@ -48,6 +48,10 @@ public class Hero
         {
             Mana = 30;
         }
+        else
+        {
+            Mana += manaPoints;
+        }
     }
     
     public int GetSwordAttackManaRestore() => SwordAttackManaResore;
