@@ -56,4 +56,13 @@ public class Hero
     
     public int GetSwordAttackManaRestore() => SwordAttackManaResore;
 
+    public void TakeDamage(int damage)
+    {
+        if (Health - damage <= 0) Health = 0;
+        else Health -= damage;
+        
+    }
+    
+    public int GetHealth() => Health;
+
 }
