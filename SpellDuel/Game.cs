@@ -23,24 +23,19 @@ public class Game
         Console.WriteLine("2. Fireball - deal 35 damage, cost 20 mana");
         while (isActive)
         {
-            Console.WriteLine($"Golem health: {Golem.GetHealth()}, Your mana: {Hero.GetMana()}");
-            Action(Console.ReadLine());
-            checkGameStatus();
+            Console.WriteLine($"Golem health: {Golem.GetHealth()}");
+            Console.WriteLine($"Your health: {Hero.GetHealth()} Your mana: {Hero.GetMana()}");
+            if (!Action(Console.ReadLine()))
+                continue;
 
-            if (!isActive)
-            {
-                Console.WriteLine("You defeated a golem");
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            }
-            
-            
-
+            if (isActive) checkGameStatus();
+            if (isActive) GolemTurn();
+            if (isActive) checkGameStatus();
             
         }
     }
 
-    public void Action(String action)
+    public bool Action(String action)
     {
         switch (action)
         {
@@ -48,7 +43,7 @@ public class Game
                 Hero.RestoreMana(Hero.GetSwordAttackManaRestore()); 
                 Golem.GetDamage(Hero.SwordAttack());
                 if (Golem.GetHealth() <= 0) EndGame();
-                break;
+                return true;
             case "2":
                 if (Hero.CheckAvailableMana(Hero.GetSpellFireballManaCost()))
                 {
@@ -59,11 +54,12 @@ public class Game
                 else
                 {
                     Console.WriteLine("Not enough mana");
+                    return  false;
                 }
-                break;
+                return  true;
             default:
                 Console.WriteLine("Invalid action");
-                break;
+                return  false;
         }
     }
 
@@ -74,6 +70,24 @@ public class Game
 
     public void checkGameStatus()
     {
-        if (Golem.GetHealth() <= 0) EndGame();
+        if (Golem.GetHealth() <= 0)
+        {
+            EndGame();
+            Console.WriteLine("You defeated a golem");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        } else if (Hero.GetHealth() <= 0)
+        {
+            EndGame();
+            Console.WriteLine("You dead.. Killed by a training golem? ha..");
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadKey();
+        }
+        
+    }
+    
+    public void GolemTurn()
+    {
+        Hero.TakeDamage(Golem.GetAttack());
     }
 }
