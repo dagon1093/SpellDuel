@@ -27,10 +27,10 @@ public class Game
             Console.WriteLine($"Your health: {Hero.GetHealth()} Your mana: {Hero.GetMana()}");
             if (!Action(Console.ReadLine()))
                 continue;
-            
-            checkGameStatus();
+
+            if (isActive) checkGameStatus();
             if (isActive) GolemTurn();
-            checkGameStatus();
+            if (isActive) checkGameStatus();
             
         }
     }
