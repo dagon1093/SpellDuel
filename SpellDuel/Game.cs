@@ -19,14 +19,16 @@ public class Game
         Console.WriteLine("Welcome to the game!");
         Console.WriteLine("You must defeat a golem");
         Console.WriteLine("Choose your action:");
-        Console.WriteLine("1. Sword Atack - deal 18 damage and get 10-30 mana");
+        Console.WriteLine("1. Sword Attack - deal 18 damage and get 10 mana");
         Console.WriteLine("2. Fireball - deal 35 damage, cost 20 mana");
         while (isActive)
         {
             Console.WriteLine($"Golem health: {Golem.GetHealth()}");
             Console.WriteLine($"Your health: {Hero.GetHealth()} Your mana: {Hero.GetMana()}");
-            if (!Action(Console.ReadLine()))
-                continue;
+            var action = Console.ReadLine();
+            if (action is null) break;
+            if (!Action(action)) continue;
+            
 
             if (isActive) checkGameStatus();
             if (isActive) GolemTurn();
@@ -40,16 +42,15 @@ public class Game
         switch (action)
         {
             case "1": 
-                Hero.RestoreMana(Hero.GetSwordAttackManaRestore()); 
+                Hero.RestoreMana(Hero.GetSwordAttackManaRestore());
                 Golem.GetDamage(Hero.SwordAttack());
-                if (Golem.GetHealth() <= 0) EndGame();
                 return true;
             case "2":
                 if (Hero.CheckAvailableMana(Hero.GetSpellFireballManaCost()))
                 {
                     Hero.SetMana(Hero.GetMana() - Hero.GetSpellFireballManaCost());
                     Golem.GetDamage(Hero.FireballAttack());
-                    if (Golem.GetHealth() <= 0) EndGame();
+                    
                 }
                 else
                 {
