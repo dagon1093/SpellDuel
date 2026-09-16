@@ -30,9 +30,9 @@ public class Game
             if (!Action(action)) continue;
             
 
-            if (isActive) checkGameStatus();
+            if (isActive) CheckGameStatus();
             if (isActive) GolemTurn();
-            if (isActive) checkGameStatus();
+            if (isActive) CheckGameStatus();
             
         }
     }
@@ -69,14 +69,26 @@ public class Game
         isActive = false;
     }
 
-    public void checkGameStatus()
+    public void CheckGameStatus()
     {
         if (Golem.GetHealth() <= 0)
         {
-            EndGame();
-            Console.WriteLine("You defeated a golem");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
+            Console.WriteLine("You defeated a golem, got 1 xp");
+            Console.WriteLine("Do you want to train again? y/n");
+            var key = Console.ReadKey();
+            if (key.Key == ConsoleKey.Y)
+            {
+                CreateEnemy();
+                Hero.FullRestoreHP();
+                Hero.FullRestoreMana();
+            }
+            if (key.Key == ConsoleKey.N)
+            {
+                EndGame();
+                Console.WriteLine("Press any key to continue...");
+                Console.ReadKey();
+            }
+            
         } else if (Hero.GetHealth() <= 0)
         {
             EndGame();
@@ -90,5 +102,10 @@ public class Game
     public void GolemTurn()
     {
         Hero.TakeDamage(Golem.GetAttack());
+    }
+
+    public void CreateEnemy()
+    {
+        Golem = new Golem(100);
     }
 }

@@ -3,7 +3,9 @@ namespace SpellDuel;
 public class Hero
 {
     private int Health { get; set; } = 100;
+    private int MaxHealth { get; set; } = 100;
     private int Mana { get; set; } = 30;
+    private int MaxMana { get; set; } = 30;
     private int SwordDamage { get; set; } = 18;
     
     private int SwordAttackManaResore { get; set; } = 10;
@@ -64,5 +66,10 @@ public class Hero
     }
     
     public int GetHealth() => Health;
-
+    
+    public int GetMaxHealth() => MaxHealth;
+    public void FullRestoreHP() => Health = MaxHealth;
+    public int GetMaxMana() => MaxMana;
+    public void FullRestoreMana() => Mana = MaxMana;
+    
 }
