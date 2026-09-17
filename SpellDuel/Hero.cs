@@ -8,10 +8,13 @@ public class Hero
     private int MaxMana { get; set; } = 30;
     private int SwordDamage { get; set; } = 18;
     
-    private int SwordAttackManaResore { get; set; } = 10;
+    private int SwordAttackManaRestore { get; set; } = 10;
     
     private int FireballDamage { get; set; } = 35;
     private int FireballManaCost { get; set; } = 20;
+    private int Level { get; set; } = 1;
+    private int Experience { get; set; } = 0;
+    private int LvlUpExperience { get; set; } = 10;
 
     public Hero(int health, int mana)
     {
@@ -56,7 +59,7 @@ public class Hero
         }
     }
     
-    public int GetSwordAttackManaRestore() => SwordAttackManaResore;
+    public int GetSwordAttackManaRestore() => SwordAttackManaRestore;
 
     public void TakeDamage(int damage)
     {
@@ -72,4 +75,25 @@ public class Hero
     public int GetMaxMana() => MaxMana;
     public void FullRestoreMana() => Mana = MaxMana;
     
+    public int GetExperience() => Experience;
+    public int GetLvlUpExperience() => LvlUpExperience;
+    public int GetLevel() => Level;
+    public void LvlUp()
+    {
+        Level += 1;  
+        LvlUpExperience = (int)(LvlUpExperience * 1.5);
+        SwordDamage = (int)(SwordDamage * 1.3);
+    } 
+    
+    public void UpExperience(int experience)
+    {
+        if (GetLvlUpExperience() <= Experience + experience)
+        {
+            Experience = (Experience + experience) -  GetLvlUpExperience();
+            LvlUp();
+            
+        }
+         Experience += experience;
+    }
+
 }

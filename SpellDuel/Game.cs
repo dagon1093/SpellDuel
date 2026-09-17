@@ -63,15 +63,15 @@ public class Game
             if (key.Key == ConsoleKey.Y)
             {
                 CreateEnemy();
-                Hero.FullRestoreHP();
-                Hero.FullRestoreMana();
-            }
-            if (key.Key == ConsoleKey.N)
+                Victory();
+            } else if (key.Key == ConsoleKey.N)
             {
                 BattleStatus = BattleStatus.Inactive;
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
-            }
+            } else if (key.Key != ConsoleKey.Y || key.Key != ConsoleKey.N)
+                HandleEnding();
+            
         } else if (BattleStatus == BattleStatus.Defeat)
         {
             Console.WriteLine("You dead.. Killed by a training golem? ha..");
@@ -85,6 +85,7 @@ public class Game
         if (Golem.GetHealth() <= 0)
         {
             BattleStatus =  BattleStatus.Victory;
+            
         } else if (Hero.GetHealth() <= 0)
         {
             BattleStatus = BattleStatus.Defeat;
@@ -117,6 +118,7 @@ public class Game
     {
         BattleStatus = BattleStatus.inProgress;
         
+        Console.WriteLine($"Hero Stats: Hero LVL {Hero.GetLevel()}, Hero Experience: {Hero.GetExperience()}");
         Console.WriteLine("Choose your action:");
         Console.WriteLine("1. Sword Attack - deal 18 damage and get 10 mana");
         Console.WriteLine("2. Fireball - deal 35 damage, cost 20 mana");
@@ -126,15 +128,13 @@ public class Game
             PrintHeroAndEnemyStat();
             
             var action = Console.ReadLine();
-            bool userAction;
-            if (action is null) break;
-            if (BattleStatus == BattleStatus.inProgress)
-                userAction = Action(action);
-            else
+            
+            if (action is null || BattleStatus != BattleStatus.inProgress) 
             {
                 BattleStatus = BattleStatus.Inactive;
                 break;
             }
+            var userAction = Action(action);
             
             CheckGameStatus();
             if (BattleStatus == BattleStatus.inProgress && userAction) GolemTurn();
@@ -142,6 +142,14 @@ public class Game
         }
 
 
+    }
+
+    public void Victory()
+    {
+        BattleStatus = BattleStatus.Victory;
+        Hero.FullRestoreHP();
+        Hero.FullRestoreMana();
+        Hero.UpExperience(Golem.GetGiveExp());
     }
 
     
