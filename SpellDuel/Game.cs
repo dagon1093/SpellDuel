@@ -18,7 +18,12 @@ public class Game
     {
         Console.WriteLine("Welcome to the game!");
         Console.WriteLine("You must defeat a golem");
-        GameCycle();
+        while (BattleStatus != BattleStatus.Inactive)
+        {
+            GameCycle();
+            HandleEnding();
+        }
+
     }
 
     public bool Action(String action)
@@ -64,6 +69,7 @@ public class Game
             }
             if (key.Key == ConsoleKey.N)
             {
+                BattleStatus = BattleStatus.Inactive;
                 Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
@@ -72,6 +78,7 @@ public class Game
             Console.WriteLine("You dead.. Killed by a training golem? ha..");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+            BattleStatus = BattleStatus.Inactive;
         }
     }
     public void CheckGameStatus()
@@ -131,7 +138,7 @@ public class Game
             CheckGameStatus();
         }
 
-        HandleEnding();
+
     }
 
     
