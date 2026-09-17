@@ -4,37 +4,26 @@ public class Game
 {
     public Hero Hero { get; set; }
     public Golem Golem { get; set; }
+    public BattleStatus BattleStatus { get; set; }
     
-    private bool isActive;
 
     public Game()
     {
         Hero = new Hero();
         Golem = new Golem(100);
-        isActive = true;
+        BattleStatus = BattleStatus.inProgress;
     }
 
     public void StartGame()
     {
         Console.WriteLine("Welcome to the game!");
         Console.WriteLine("You must defeat a golem");
-        Console.WriteLine("Choose your action:");
-        Console.WriteLine("1. Sword Attack - deal 18 damage and get 10 mana");
-        Console.WriteLine("2. Fireball - deal 35 damage, cost 20 mana");
-        while (isActive)
+        while (BattleStatus != BattleStatus.Inactive)
         {
-            Console.WriteLine($"Golem health: {Golem.GetHealth()}");
-            Console.WriteLine($"Your health: {Hero.GetHealth()} Your mana: {Hero.GetMana()}");
-            var action = Console.ReadLine();
-            if (action is null) break;
-            if (!Action(action)) continue;
-            
-
-            if (isActive) checkGameStatus();
-            if (isActive) GolemTurn();
-            if (isActive) checkGameStatus();
-            
+            GameCycle();
+            HandleEnding();
         }
+
     }
 
     public bool Action(String action)
@@ -64,31 +53,111 @@ public class Game
         }
     }
 
-    public void EndGame()
+    public void HandleEnding()
     {
-        isActive = false;
-    }
+        if (BattleStatus == BattleStatus.Victory)
+        {
+            Victory();
+            Console.WriteLine("You defeated a golem, got 1 xp");
+            while (true)
+            {
+                Console.WriteLine("Do you want to train again? y/n");
+                
+                var key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Y)
+                {
+                    CreateEnemy();
+                    
+                    break;
+                }
+                if (key.Key == ConsoleKey.N)
+                {
+                    BattleStatus = BattleStatus.Inactive;
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    break;
+                } 
+            }
 
-    public void checkGameStatus()
-    {
-        if (Golem.GetHealth() <= 0)
+        } else if (BattleStatus == BattleStatus.Defeat)
         {
-            EndGame();
-            Console.WriteLine("You defeated a golem");
-            Console.WriteLine("Press any key to continue...");
-            Console.ReadKey();
-        } else if (Hero.GetHealth() <= 0)
-        {
-            EndGame();
             Console.WriteLine("You dead.. Killed by a training golem? ha..");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
+            BattleStatus = BattleStatus.Inactive;
         }
-        
+    }
+    public void CheckGameStatus()
+    {
+        if (Golem.GetHealth() <= 0)
+        {
+            BattleStatus =  BattleStatus.Victory;
+            
+        } else if (Hero.GetHealth() <= 0)
+        {
+            BattleStatus = BattleStatus.Defeat;
+        }
+
     }
     
     public void GolemTurn()
     {
         Hero.TakeDamage(Golem.GetAttack());
     }
+
+    public void CreateEnemy()
+    {
+        Golem = new Golem(100);
+    }
+
+    public void PrintHeroAndEnemyStat()
+    {
+        Console.WriteLine($"Golem health: {Golem.GetHealth()}");
+        Console.WriteLine($"Your health: {Hero.GetHealth()} Your mana: {Hero.GetMana()}");
+    }
+
+    public void SetBattleStatus(BattleStatus battleStatus)
+    {
+        BattleStatus = battleStatus;
+    }
+
+    public void GameCycle()
+    {
+        BattleStatus = BattleStatus.inProgress;
+        
+        Console.WriteLine($"Hero Stats: Hero LVL {Hero.GetLevel()}, Hero Experience: {Hero.GetExperience()}");
+        Console.WriteLine("Choose your action:");
+        Console.WriteLine($"1. Sword Attack - deal {Hero.SwordAttack()} damage and get 10 mana");
+        Console.WriteLine("2. Fireball - deal 35 damage, cost 20 mana");
+        
+        while (BattleStatus == BattleStatus.inProgress)
+        {
+            PrintHeroAndEnemyStat();
+            
+            var action = Console.ReadLine();
+            
+            if (action is null || BattleStatus != BattleStatus.inProgress) 
+            {
+                BattleStatus = BattleStatus.Inactive;
+                break;
+            }
+            var userAction = Action(action);
+            
+            CheckGameStatus();
+            if (BattleStatus == BattleStatus.inProgress && userAction) GolemTurn();
+            CheckGameStatus();
+        }
+
+
+    }
+
+    public void Victory()
+    {
+        BattleStatus = BattleStatus.Victory;
+        Hero.FullRestoreHP();
+        Hero.FullRestoreMana();
+        Hero.UpExperience(Golem.GetGiveExp());
+    }
+
+    
 }

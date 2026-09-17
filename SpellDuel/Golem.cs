@@ -5,12 +5,13 @@ public class Golem
     int Health  { get; set; }
     private int Attack { get; set; } = 25;
     
+    private int GiveExp { get; set; } = 1;
+    
     public Golem(int health)
     {
         Health = health;
     }
     
-
     public int GetHealth() => Health;
 
     public void GetDamage(int points)
@@ -20,4 +21,6 @@ public class Golem
     }
 
     public int GetAttack() => Attack;
+    
+    public int GetGiveExp() => GiveExp;
 }
