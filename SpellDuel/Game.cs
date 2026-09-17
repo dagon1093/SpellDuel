@@ -57,6 +57,7 @@ public class Game
     {
         if (BattleStatus == BattleStatus.Victory)
         {
+            Victory();
             Console.WriteLine("You defeated a golem, got 1 xp");
             while (true)
             {
@@ -66,7 +67,7 @@ public class Game
                 if (key.Key == ConsoleKey.Y)
                 {
                     CreateEnemy();
-                    Victory();
+                    
                     break;
                 }
                 if (key.Key == ConsoleKey.N)
