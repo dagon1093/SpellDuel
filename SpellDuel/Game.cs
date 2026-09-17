@@ -58,20 +58,26 @@ public class Game
         if (BattleStatus == BattleStatus.Victory)
         {
             Console.WriteLine("You defeated a golem, got 1 xp");
-            Console.WriteLine("Do you want to train again? y/n");
-            var key = Console.ReadKey();
-            if (key.Key == ConsoleKey.Y)
+            while (true)
             {
-                CreateEnemy();
-                Victory();
-            } else if (key.Key == ConsoleKey.N)
-            {
-                BattleStatus = BattleStatus.Inactive;
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();
-            } else if (key.Key != ConsoleKey.Y || key.Key != ConsoleKey.N)
-                HandleEnding();
-            
+                Console.WriteLine("Do you want to train again? y/n");
+                
+                var key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Y)
+                {
+                    CreateEnemy();
+                    Victory();
+                    break;
+                }
+                if (key.Key == ConsoleKey.N)
+                {
+                    BattleStatus = BattleStatus.Inactive;
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
+                    break;
+                } 
+            }
+
         } else if (BattleStatus == BattleStatus.Defeat)
         {
             Console.WriteLine("You dead.. Killed by a training golem? ha..");
@@ -120,7 +126,7 @@ public class Game
         
         Console.WriteLine($"Hero Stats: Hero LVL {Hero.GetLevel()}, Hero Experience: {Hero.GetExperience()}");
         Console.WriteLine("Choose your action:");
-        Console.WriteLine("1. Sword Attack - deal 18 damage and get 10 mana");
+        Console.WriteLine($"1. Sword Attack - deal {Hero.SwordAttack()} damage and get 10 mana");
         Console.WriteLine("2. Fireball - deal 35 damage, cost 20 mana");
         
         while (BattleStatus == BattleStatus.inProgress)

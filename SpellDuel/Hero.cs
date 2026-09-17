@@ -92,8 +92,7 @@ public class Hero
             Experience = (Experience + experience) -  GetLvlUpExperience();
             LvlUp();
             
-        }
-         Experience += experience;
+        } else Experience += experience;
     }
 
 }
