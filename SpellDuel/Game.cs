@@ -65,7 +65,6 @@ public class Game
                 CreateEnemy();
                 Hero.FullRestoreHP();
                 Hero.FullRestoreMana();
-                GameCycle();
             }
             if (key.Key == ConsoleKey.N)
             {
@@ -90,7 +89,7 @@ public class Game
         {
             BattleStatus = BattleStatus.Defeat;
         }
-        else BattleStatus = BattleStatus.inProgress;
+
     }
     
     public void GolemTurn()
@@ -131,7 +130,11 @@ public class Game
             if (action is null) break;
             if (BattleStatus == BattleStatus.inProgress)
                 userAction = Action(action);
-            else break;
+            else
+            {
+                BattleStatus = BattleStatus.Inactive;
+                break;
+            }
             
             CheckGameStatus();
             if (BattleStatus == BattleStatus.inProgress && userAction) GolemTurn();
